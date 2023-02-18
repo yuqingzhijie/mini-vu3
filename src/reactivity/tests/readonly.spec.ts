@@ -21,6 +21,6 @@ describe('readonly', () => {
 
     user.age = 11
 
-    expect(console.warn).toBeCalled();
+    expect(console.warn).toHaveBeenCalled();
   })
 })
