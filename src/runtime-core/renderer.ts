@@ -11,6 +11,7 @@ function patch(vnode, container) {
   // 去处理组件
 
   // 判断 是不是 element
+  // todo processElement()
   processComponent(vnode, container);
 }
 
