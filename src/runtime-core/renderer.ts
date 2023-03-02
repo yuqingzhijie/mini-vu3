@@ -1,4 +1,4 @@
-import { isObject } from '../shared/index';
+import { ShapeFlags } from '../shared/ShapeFlags';
 import { createComponentInstance, setupComponent } from './component';
 
 export function render(vnode, container) {
@@ -9,9 +9,14 @@ export function render(vnode, container) {
 }
 
 function patch(vnode, container) {
-  if (typeof vnode.type === 'string') {
+  // ShapeFlags
+  // vnode -> flag
+  // element
+  const { shapeFlag } = vnode;
+  if (shapeFlag & ShapeFlags.ELEMENT) {
     processElement(vnode, container);
-  } else if (isObject(vnode.type)) {
+    // STATFULL_COMPONENT
+  } else if (shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
     processComponent(vnode, container);
   }
 }
@@ -23,12 +28,17 @@ function processElement(vnode: any, container: any) {
 function mountElement(vnode: any, container: any) {
   const el = (vnode.el = document.createElement(vnode.type));
 
-  const { children, props } = vnode;
-  if (typeof children === 'string') {
+  const { shapeFlag, children, props } = vnode;
+
+  // children
+  if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
+    // text_children
     el.textContent = children;
-  } else if (Array.isArray(children)) {
+  } else if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
+    // array_children
     mountChidren(vnode, el);
   }
+
   for (const key in props) {
     const val = props[key];
     el.setAttribute(key, val);
