@@ -3,31 +3,46 @@ import { Foo } from './Foo.js';
 
 window.self = null;
 export const App = {
+  name: 'App',
   // .vue
   // <template></template>
   // render
   render() {
+    // emit
+    return h('div', {}, [
+      h('div', {}, 'App'),
+      h(Foo, {
+        // on + Event
+        onAdd(a, b) {
+          console.log('onAdd', a, b);
+        },
+        // add-foo -> addFoo
+        onAddFoo() {
+          console.log('onAddFoo');
+        },
+      }),
+    ]);
     // ui
-    window.self = this;
-    return h(
-      'div',
-      {
-        id: 'root',
-        class: ['red', 'hard'],
-        onClick() {
-          console.log('click');
-        },
-        onMousedown() {
-          console.log('mouse dome');
-        },
-      },
-      [h('div', {}, 'hi, ' + this.msg), h(Foo, { count: 1 })]
-      // 'hi, ' + this.msg
-      // string
-      // "hi, mini-vue"
-      // array
-      // [h('p', { class: 'red' }, 'hello'), h('p', { class: 'blue' }, 'vue3')]
-    );
+    // window.self = this;
+    // return h(
+    //   'div',
+    //   {
+    //     id: 'root',
+    //     class: ['red', 'hard'],
+    //     onClick() {
+    //       console.log('click');
+    //     },
+    //     onMousedown() {
+    //       console.log('mouse dome');
+    //     },
+    //   },
+    //   [h('div', {}, 'hi, ' + this.msg), h(Foo, { count: 1 })]
+    // 'hi, ' + this.msg
+    // string
+    // "hi, mini-vue"
+    // array
+    // [h('p', { class: 'red' }, 'hello'), h('p', { class: 'blue' }, 'vue3')]
+    // );
   },
 
   setup() {
