@@ -1,3 +1,4 @@
 // mini-vu3 出口
-export * from "./runtime-core/index";
+export * from './reactivity';
+export * from './runtime-dom';
 
