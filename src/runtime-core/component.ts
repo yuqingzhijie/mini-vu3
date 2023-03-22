@@ -9,6 +9,7 @@ export function createComponentInstance(vnode, parent) {
   const component = {
     vnode,
     type: vnode.type,
+    component: null,
     setupState: {},
     props: {},
     slots: {},
@@ -16,6 +17,7 @@ export function createComponentInstance(vnode, parent) {
     parent,
     isMounted: false,
     subTree: {},
+    next: null,
     emit: () => {},
   };
 
