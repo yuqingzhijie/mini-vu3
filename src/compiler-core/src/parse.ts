@@ -63,7 +63,6 @@ function parseText(context: any): any {
   }
 
   const content = parseTextData(context, endIndex);
-  console.log(content, '----');
 
   return {
     type: NodeTypes.TEXT,
@@ -143,6 +142,7 @@ function advanceBy(context: any, length: number) {
 function createRoot(children) {
   return {
     children,
+    type: NodeTypes.ROOT,
   };
 }
 
